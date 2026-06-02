@@ -8,7 +8,7 @@ This project is a small **ETL pipeline** that pulls macroeconomic indicators fro
 - SQLite (sqlite3)
 
 ## Project Structure
-- `rsc/`
+- `src/`
   - `extract_worldbank.py` - Extract a single country + single indicator (raw JSON + normalized CSV)
   - `extract_batch_worldbank.py` - Batch extract (multiple countries/indicators into one consolidated CSV)
   - `load_sqlite.py` - Load normalized CSV into `data/wb.sqlite` (idempotent upsert)
@@ -22,16 +22,16 @@ python -m pip install -r requirements.txt
 
 ## Run (Single Indicator)
 ```bash
-python rsc/extract_worldbank.py --country ES --indicator NY.GDP.MKTP.CD --start 1995 --end 2024 --per-page 200
-python rsc/load_sqlite.py --csv "data/raw/ES_NY.GDP.MKTP.CD_1995_2024.csv"
-python rsc/report.py --db data/wb.sqlite --country ES --indicator NY.GDP.MKTP.CD
+python src/extract_worldbank.py --country ES --indicator NY.GDP.MKTP.CD --start 1995 --end 2024 --per-page 200
+python src/load_sqlite.py --csv "data/raw/ES_NY.GDP.MKTP.CD_1995_2024.csv"
+python src/report.py --db data/wb.sqlite --country ES --indicator NY.GDP.MKTP.CD
 ```
 
 ## Run (Batch + Rankings)
 ```bash
-python rsc/extract_batch_worldbank.py --start 1995 --end 2024
-python rsc/load_sqlite.py --csv "data/raw/observations_1995_2024.csv"
-python rsc/report_compare.py --db data/wb.sqlite --out reports/compare_summary.md
+python src/extract_batch_worldbank.py --start 1995 --end 2024
+python src/load_sqlite.py --csv "data/raw/observations_1995_2024.csv"
+python src/report_compare.py --db data/wb.sqlite --out reports/compare_summary.md
 ```
 
 ## Outputs
