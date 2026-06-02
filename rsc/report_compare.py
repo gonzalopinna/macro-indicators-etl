@@ -97,7 +97,7 @@ def main() -> int:
         lines.append(f"- Observations: **{obs}**\n")
         lines.append(f"- Countries: **{n_countries}**\n")
         lines.append(f"- Indicators: **{n_indicators}**\n")
-        lines.append(f"- Year range: **{yr_min} – {yr_max}**\n\n")
+        lines.append(f"- Year range: **{yr_min} - {yr_max}**\n\n")
 
         lines.append("## Rankings by indicator\n")
         lines.append(

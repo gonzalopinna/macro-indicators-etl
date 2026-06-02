@@ -92,12 +92,12 @@ def main() -> int:
 
         lines.append("\n## Change\n")
         if v_5y is not None and chg_5y is not None:
-            lines.append(f"- 5Y change ({latest_year-5} → {latest_year}): **{chg_5y:.2f}%**\n")
+            lines.append(f"- 5Y change ({latest_year-5} -> {latest_year}): **{chg_5y:.2f}%**\n")
         else:
             lines.append("- 5Y change: N/A\n")
 
         if v_10y is not None and chg_10y is not None:
-            lines.append(f"- 10Y change ({latest_year-10} → {latest_year}): **{chg_10y:.2f}%**\n")
+            lines.append(f"- 10Y change ({latest_year-10} -> {latest_year}): **{chg_10y:.2f}%**\n")
         else:
             lines.append("- 10Y change: N/A\n")
 

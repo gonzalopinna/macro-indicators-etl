@@ -93,7 +93,7 @@ def write_json(path: Path, obj: Any) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--countries", default="ESP,FRA,DEU,ITA,PRT,GBR,USA,JPN")
+    ap.add_argument("--countries", default="ES,FR,DE,IT,PT,GB,US,JP")
     ap.add_argument("--indicators", default="NY.GDP.MKTP.CD,NY.GDP.PCAP.CD,FP.CPI.TOTL.ZG,SL.UEM.TOTL.ZS,NY.GDP.MKTP.KD.ZG")
     ap.add_argument("--start", type=int, default=1995)
     ap.add_argument("--end", type=int, default=2024)
@@ -114,7 +114,11 @@ def main() -> int:
 
     for c in countries:
         for ind in indicators:
-            rows = fetch_series(session, c, ind, args.start, args.end, args.per_page)
+            try:
+                rows = fetch_series(session, c, ind, args.start, args.end, args.per_page)
+            except requests.HTTPError as exc:
+                print(f"Skipping {c} / {ind}: {exc}")
+                continue
             norm = normalize_rows(rows)
             all_rows.extend(norm)
             print(f"{c} / {ind}: {len(norm)} rows")

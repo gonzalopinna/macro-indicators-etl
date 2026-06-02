@@ -37,6 +37,7 @@ def fetch_series(country: str, indicator: str, start: int, end: int, per_page: i
     }
     session = make_session()
     r = session.get(url, params=params, timeout=90)
+    r.raise_for_status()
 
     payload = r.json()
     if not isinstance(payload, list) or len(payload) < 2:
@@ -100,7 +101,7 @@ def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--country", default="ESP", help="Country code (ISO2 or ISO3). Example: ESP.")
+    ap.add_argument("--country", default="ES", help="World Bank country code. Example: ES.")
     ap.add_argument("--indicator", default="NY.GDP.MKTP.CD", help="World Bank indicator code.")
     ap.add_argument("--start", type=int, default=1995)
     ap.add_argument("--end", type=int, default=2024)
